@@ -13,4 +13,6 @@ public:
 
 protected:
 	virtual void Update() = 0;
+
+	friend class SGameEngine;
 };
