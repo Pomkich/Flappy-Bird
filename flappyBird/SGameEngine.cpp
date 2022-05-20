@@ -4,6 +4,10 @@ SGameEngine::SGameEngine() {
 	window.create(sf::VideoMode(800, 600), "sue");
 }
 
+void SGameEngine::addObject(std::shared_ptr<GameObject> p_obj) {
+    game_objects.push_back(p_obj);
+}
+
 void SGameEngine::Update() {
     if (!game_objects.empty()) {
         for (auto& object : game_objects) {
@@ -15,7 +19,12 @@ void SGameEngine::Update() {
 void SGameEngine::Render() {
     window.clear(sf::Color::Black);
 
-    // drawing
+    if (!game_objects.empty()) {
+        for (auto& object : game_objects) {
+            window.draw(object->getSprite());
+        }
+    }
+
     window.display();
 }
 

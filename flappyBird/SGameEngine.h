@@ -11,7 +11,7 @@ class SGameEngine {
 	sf::RenderWindow window;
 
 private:
-	std::list<std::unique_ptr<GameObject>> game_objects;
+	std::list<std::shared_ptr<GameObject>> game_objects;
 
 	void Update();
 	void Render();
@@ -19,5 +19,5 @@ private:
 public:
 	SGameEngine();
 	void Start();
-	void addObject(std::unique_ptr<GameObject> p_obj);
+	void addObject(std::shared_ptr<GameObject> p_obj);
 };
