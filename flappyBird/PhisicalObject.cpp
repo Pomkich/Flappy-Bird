@@ -4,7 +4,8 @@ PhisicalObject::PhisicalObject() {
 
 }
 
-void PhisicalObject::Update() {
+void PhisicalObject::Update() {	// phisical object must take into account 
+								// all the forces of influence on the object
 	if (moving_vectors.empty()) return;
 
 	float sum_x = 0, sum_y = 0;

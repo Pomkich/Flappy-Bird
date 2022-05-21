@@ -5,7 +5,7 @@
 
 class PhisicalObject : public GameObject {
 protected:
-	std::vector<sf::Vector2f> moving_vectors;
+	std::vector<sf::Vector2f> moving_vectors;	// forces acting on the object
 
 private:
 	virtual void Update() override;

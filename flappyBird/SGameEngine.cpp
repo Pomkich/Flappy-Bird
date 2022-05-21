@@ -7,7 +7,7 @@ SGameEngine::SGameEngine() {
 void SGameEngine::addObject(std::shared_ptr<GameObject> p_obj) {
     if (!game_objects.empty()) {
         for (auto& obj : game_objects) {
-            if (obj->getName() == p_obj->getName()) {
+            if (obj->getName() == p_obj->getName()) {   // unique name check
                 std::cout << "SGameEngine::addObject: found duplicate name, name of GameObject must be unique" << std::endl;
                 return;
             }
