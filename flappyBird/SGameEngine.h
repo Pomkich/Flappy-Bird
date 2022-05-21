@@ -1,5 +1,5 @@
 #pragma once
-#include <list>
+#include <vector>
 #include <memory>
 #include "GameObject.h"
 #include "SFML/Window.hpp"
@@ -7,11 +7,11 @@
 #include <time.h>
 
 
+// main class, contents game objects and logic of engine
 class SGameEngine {
-	sf::RenderWindow window;
-
 private:
-	std::list<std::shared_ptr<GameObject>> game_objects;
+	sf::RenderWindow window;
+	std::vector<std::shared_ptr<GameObject>> game_objects;
 
 	void HandleInput(sf::Event input);
 	void Update();

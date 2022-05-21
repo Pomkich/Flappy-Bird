@@ -2,10 +2,6 @@
 
 GameObject::GameObject() {
 	int x = 0, y = 0, width = 0, height = 0;
-	moving_vector.x = 0;
-	moving_vector.y = 0;
-	moving_vector2.x = 0;
-	moving_vector2.y = 0;
 	position.x = x;
 	position.y = y;
 	bounding_rect.setPosition(sf::Vector2f(x, y));
@@ -16,10 +12,6 @@ GameObject::GameObject() {
 }
 
 GameObject::GameObject(float x, float y, float width, float height) {
-	moving_vector.x = 0;
-	moving_vector.y = 0;
-	moving_vector2.x = 0;
-	moving_vector2.y = 0;
 	position.x = x;
 	position.y = y;
 	bounding_rect.setPosition(sf::Vector2f(x, y));
@@ -30,8 +22,7 @@ GameObject::GameObject(float x, float y, float width, float height) {
 }
 
 void GameObject::Update() {
-	setPosition(position.x + moving_vector.x + moving_vector2.x,
-		position.y + moving_vector.y + moving_vector2.y);
+
 }
 
 void GameObject::HandleInput(sf::Event input) {

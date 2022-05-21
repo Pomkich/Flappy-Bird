@@ -38,7 +38,7 @@ void SGameEngine::Render() {
 
 void SGameEngine::Start() {
     window.setActive(true);
-    window.setKeyRepeatEnabled(false);
+    window.setKeyRepeatEnabled(false); // better disable for better perfomance
     while (window.isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop

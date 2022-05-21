@@ -1,11 +1,14 @@
 #include <iostream>
 #include "SGameEngine.h"
+#include "PhisicalObject.h"
 
 using namespace std;
 
-class Player : public GameObject {
+class Player : public PhisicalObject {
 public:
 	Player() {
+		moving_vectors.push_back(sf::Vector2f(0, 0));	// there is two vectors for player
+		moving_vectors.push_back(sf::Vector2f(0, 0));	// movement. Developer must remember what each vector means
 	};
 
 protected:
@@ -14,16 +17,16 @@ protected:
 			switch (input.key.code) {
 
 			case sf::Keyboard::Right:
-				moving_vector.x = 5;
+				moving_vectors[0].x = 5;
 				break;
 			case sf::Keyboard::Left:
-				moving_vector2.x = -5;
+				moving_vectors[1].x = -5;
 				break;
 			case sf::Keyboard::Up:
-				moving_vector.y = -5;
+				moving_vectors[0].y = -5;
 				break;
 			case sf::Keyboard::Down:
-				moving_vector2.y = 5;
+				moving_vectors[1].y = 5;
 				break;
 			}
 		}
@@ -31,16 +34,16 @@ protected:
 			switch (input.key.code) {
 
 			case sf::Keyboard::Right:
-				moving_vector.x = 0;
+				moving_vectors[0].x = 0;
 				break;
 			case sf::Keyboard::Left:
-				moving_vector2.x = 0;
+				moving_vectors[1].x = 0;
 				break;
 			case sf::Keyboard::Up:
-				moving_vector.y = 0;
+				moving_vectors[0].y = 0;
 				break;
 			case sf::Keyboard::Down:
-				moving_vector2.y = 0;
+				moving_vectors[1].y = 0;
 				break;
 			}
 		}

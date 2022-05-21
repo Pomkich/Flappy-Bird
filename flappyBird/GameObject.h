@@ -5,8 +5,6 @@
 class GameObject {
 protected:
 	sf::Vector2f position;
-	sf::Vector2f moving_vector;
-	sf::Vector2f moving_vector2;
 	sf::RectangleShape bounding_rect;
 	sf::CircleShape sprite;
 
@@ -20,8 +18,8 @@ public:
 	sf::CircleShape getSprite();
 
 protected:
-	virtual void Update();
-	virtual void HandleInput(sf::Event input);
+	virtual void Update();	// calling each frame
+	virtual void HandleInput(sf::Event input);	// calling each frame
 
 	friend class SGameEngine;
 };
