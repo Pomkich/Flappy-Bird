@@ -2,6 +2,8 @@
 
 GameObject::GameObject() {
 	int x = 0, y = 0, width = 0, height = 0;
+	moving_vector.x = 0;
+	moving_vector.y = 0;
 	position.x = x;
 	position.y = y;
 	bounding_rect.setPosition(sf::Vector2f(x, y));
@@ -12,6 +14,8 @@ GameObject::GameObject() {
 }
 
 GameObject::GameObject(float x, float y, float width, float height) {
+	moving_vector.x = 0;
+	moving_vector.y = 0;
 	position.x = x;
 	position.y = y;
 	bounding_rect.setPosition(sf::Vector2f(x, y));
@@ -22,10 +26,21 @@ GameObject::GameObject(float x, float y, float width, float height) {
 }
 
 void GameObject::Update() {
+	setPosition(position.x + moving_vector.x, position.y + moving_vector.y);
+}
+
+void GameObject::HandleInput(sf::Event input) {
 
 }
 
 void GameObject::setPosition(sf::Vector2f new_pos) {
+	position = new_pos;
+	bounding_rect.setPosition(new_pos);
+	sprite.setPosition(new_pos);
+}
+
+void GameObject::setPosition(float x, float y) {
+	sf::Vector2f new_pos(x, y);
 	position = new_pos;
 	bounding_rect.setPosition(new_pos);
 	sprite.setPosition(new_pos);

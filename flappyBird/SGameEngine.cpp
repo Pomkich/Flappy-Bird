@@ -8,6 +8,14 @@ void SGameEngine::addObject(std::shared_ptr<GameObject> p_obj) {
     game_objects.push_back(p_obj);
 }
 
+void SGameEngine::HandleInput(sf::Event input) {
+    if (!game_objects.empty()) {
+        for (auto& object : game_objects) {
+            object->HandleInput(input);
+        }
+    }
+}
+
 void SGameEngine::Update() {
     if (!game_objects.empty()) {
         for (auto& object : game_objects) {
@@ -33,11 +41,13 @@ void SGameEngine::Start() {
     while (window.isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
+        sf::Event input;
+        while (window.pollEvent(input))
         {
-            if (event.type == sf::Event::Closed)
+            HandleInput(input);
+            if (input.type == sf::Event::Closed) {
                 window.close();
+            }
         }
         Update();
         Render();

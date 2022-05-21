@@ -5,16 +5,45 @@ using namespace std;
 
 class Player : public GameObject {
 public:
-	float x; 
 	Player() {
-		x = 10.0;
 	};
 
 protected:
-	virtual void Update() override {
-		setPosition(sf::Vector2f(x, 100));
-		x += 1;
-		//if()
+	virtual void HandleInput(sf::Event input) override {
+		if (input.type == sf::Event::KeyPressed) {
+			switch (input.key.code) {
+
+			case sf::Keyboard::Right:
+				moving_vector.x = 5;
+				break;
+			case sf::Keyboard::Left:
+				moving_vector.x = -5;
+				break;
+			case sf::Keyboard::Up:
+				moving_vector.y = -5;
+				break;
+			case sf::Keyboard::Down:
+				moving_vector.y = 5;
+				break;
+			}
+		}
+		else if (input.type == sf::Event::KeyReleased) {
+			switch (input.key.code) {
+
+			case sf::Keyboard::Right:
+				moving_vector.x = 0;
+				break;
+			case sf::Keyboard::Left:
+				moving_vector.x = 0;
+				break;
+			case sf::Keyboard::Up:
+				moving_vector.y = 0;
+				break;
+			case sf::Keyboard::Down:
+				moving_vector.y = 0;
+				break;
+			}
+		}
 	}
 };
 
