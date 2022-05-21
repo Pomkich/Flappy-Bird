@@ -38,12 +38,13 @@ void SGameEngine::Render() {
 
 void SGameEngine::Start() {
     window.setActive(true);
+    window.setKeyRepeatEnabled(false);
     while (window.isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event input;
         while (window.pollEvent(input))
-        {
+        {   
             HandleInput(input);
             if (input.type == sf::Event::Closed) {
                 window.close();

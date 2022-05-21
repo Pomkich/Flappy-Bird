@@ -17,30 +17,30 @@ protected:
 				moving_vector.x = 5;
 				break;
 			case sf::Keyboard::Left:
-				moving_vector.x = -5;
+				moving_vector2.x = -5;
 				break;
 			case sf::Keyboard::Up:
 				moving_vector.y = -5;
 				break;
 			case sf::Keyboard::Down:
-				moving_vector.y = 5;
+				moving_vector2.y = 5;
 				break;
 			}
 		}
-		else if (input.type == sf::Event::KeyReleased) {
+		if (input.type == sf::Event::KeyReleased) {
 			switch (input.key.code) {
 
 			case sf::Keyboard::Right:
 				moving_vector.x = 0;
 				break;
 			case sf::Keyboard::Left:
-				moving_vector.x = 0;
+				moving_vector2.x = 0;
 				break;
 			case sf::Keyboard::Up:
 				moving_vector.y = 0;
 				break;
 			case sf::Keyboard::Down:
-				moving_vector.y = 0;
+				moving_vector2.y = 0;
 				break;
 			}
 		}

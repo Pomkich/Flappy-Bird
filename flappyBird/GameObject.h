@@ -6,6 +6,7 @@ class GameObject {
 protected:
 	sf::Vector2f position;
 	sf::Vector2f moving_vector;
+	sf::Vector2f moving_vector2;
 	sf::RectangleShape bounding_rect;
 	sf::CircleShape sprite;
 
