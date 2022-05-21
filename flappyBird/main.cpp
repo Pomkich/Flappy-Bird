@@ -7,8 +7,8 @@ using namespace std;
 class Player : public PhisicalObject {
 public:
 	Player() {
-		moving_vectors.push_back(sf::Vector2f(0, 0));	// there is two vectors for player
-		moving_vectors.push_back(sf::Vector2f(0, 0));	// movement. Developer must remember what each vector means
+		moving_vectors.push_back(sf::Vector2f(0, 0));	// there is two vectors for player movement
+		moving_vectors.push_back(sf::Vector2f(0, 0));	// developer must remember what each vector means
 	};
 
 protected:
@@ -53,10 +53,19 @@ protected:
 int main() {
 	SGameEngine game;
 
-	game.addObject(std::make_shared<GameObject>(100, 100, 100, 100));
-	game.addObject(std::make_shared<Player>());
+	game.addObject(std::make_shared<GameObject>("rect", 100, 100, 100, 100));
+	
+	{
+		std::shared_ptr<Player> player = make_shared<Player>();
+		player->setSize(100, 100);
+		player->setName("player");
+		game.addObject(player);
+	}
+
+	game.deleteObject("rect");
 
 	game.Start();
+
 
 	return 0;
 }

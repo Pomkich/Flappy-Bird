@@ -5,7 +5,21 @@ SGameEngine::SGameEngine() {
 }
 
 void SGameEngine::addObject(std::shared_ptr<GameObject> p_obj) {
+    if (!game_objects.empty()) {
+        for (auto& obj : game_objects) {
+            if (obj->getName() == p_obj->getName()) {
+                std::cout << "SGameEngine::addObject: found duplicate name, name of GameObject must be unique" << std::endl;
+                return;
+            }
+        }
+    }
     game_objects.push_back(p_obj);
+}
+
+void SGameEngine::deleteObject(std::string obj_name) {
+    if (!game_objects.empty()) {
+        game_objects.erase(std::remove_if(game_objects.begin(), game_objects.end(), [obj_name](std::shared_ptr<GameObject> obj) { return obj->getName() == obj_name; }), game_objects.end());
+    }
 }
 
 void SGameEngine::HandleInput(sf::Event input) {
