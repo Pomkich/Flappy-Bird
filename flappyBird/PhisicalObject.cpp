@@ -13,7 +13,7 @@ void PhisicalObject::Update() {	// phisical object must take into account
 		sum_x += vec.x;
 		sum_y += vec.y;
 	}
-	setPosition(position.x + sum_x, position.y + sum_y);
+	setPosition(position.x - sum_x, position.y - sum_y);
 }
 
 void PhisicalObject::addVector(sf::Vector2f vec) {

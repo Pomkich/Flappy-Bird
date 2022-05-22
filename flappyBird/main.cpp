@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class Player : public PhisicalObject {
+/*class Player : public PhisicalObject {
 public:
 	Player() {
 		moving_vectors.push_back(sf::Vector2f(0, 0));	// there is two vectors for player movement
@@ -67,12 +67,11 @@ protected:
 		}
 		cout << endl;
 	}
-};
+};*/
 
 class Bird : public PhisicalObject {
 public:
 	Bird() {
-
 		sf::Vector2f move_vector(0, 0);
 		sf::Vector2f velocity(0, -1);
 		moving_vectors.push_back(move_vector);
@@ -83,12 +82,12 @@ private:
 	virtual void Update() override {
 		PhisicalObject::Update();	// call object moving
 
-		moving_vectors[0].y -= moving_vectors[1].y;	// the influence of gravity
+		moving_vectors[0].y += moving_vectors[1].y;	// the influence of gravity
 	}
 
 	virtual void HandleInput(sf::Event input) override {
 		if (input.type == sf::Event::KeyPressed && input.key.code == sf::Keyboard::Space) {
-				moving_vectors[0].y = -10;
+				moving_vectors[0].y = 10;
 		}
 	}
 
