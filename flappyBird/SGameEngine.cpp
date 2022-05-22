@@ -30,6 +30,22 @@ void SGameEngine::HandleInput(sf::Event input) {
     }
 }
 
+void SGameEngine::CheckCollision() {
+    if (game_objects.size() > 1) {
+        for (int checkable_obj = 0; checkable_obj < game_objects.size(); checkable_obj++) {
+            for (int obj_oncheck = checkable_obj + 1; obj_oncheck < game_objects.size(); obj_oncheck++) {
+                auto rect1 = game_objects[checkable_obj]->getBoundingRect();
+                auto rect2 = game_objects[obj_oncheck]->getBoundingRect();
+                if (std::abs(rect1.getPosition().x - rect2.getPosition().x) <= rect2.getSize().x &&
+                    std::abs(rect1.getPosition().y - rect2.getPosition().y) <= rect2.getSize().y) {
+                    game_objects[checkable_obj]->onCollide(game_objects[obj_oncheck]);
+                    game_objects[obj_oncheck]->onCollide(game_objects[checkable_obj]);
+                }
+            }
+        }
+    }
+}
+
 void SGameEngine::Update() {
     if (!game_objects.empty()) {
         for (auto& object : game_objects) {
@@ -64,6 +80,7 @@ void SGameEngine::Start() {
                 window.close();
             }
         }
+        CheckCollision();
         Update();
         Render();
     }

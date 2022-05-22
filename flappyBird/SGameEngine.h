@@ -13,6 +13,7 @@ private:
 	std::vector<std::shared_ptr<GameObject>> game_objects;
 
 	void HandleInput(sf::Event input);
+	void CheckCollision();
 	void Update();
 	void Render();
 

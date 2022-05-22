@@ -87,6 +87,10 @@ void GameObject::HandleInput(sf::Event input) {
 
 }
 
+void GameObject::onCollide(std::shared_ptr<GameObject> obj_col) {
+
+}
+
 GameObject::~GameObject() {
 	std::cout << "deleted object: " << name << std::endl;
 }

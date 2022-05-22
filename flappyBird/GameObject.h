@@ -30,6 +30,7 @@ public:
 protected:
 	virtual void Update();	// calling each frame
 	virtual void HandleInput(sf::Event input);	// calling each frame
+	virtual void onCollide(std::shared_ptr<GameObject> obj_col);
 
 	friend class SGameEngine;
 };

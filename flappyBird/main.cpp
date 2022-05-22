@@ -48,12 +48,16 @@ protected:
 			}
 		}
 	}
+
+	virtual void onCollide(std::shared_ptr<GameObject> obj_col) override {
+		cout << "collided" << endl;
+	}
 };
 
 int main() {
 	SGameEngine game;
 
-	game.addObject(std::make_shared<GameObject>("rect", 100, 100, 100, 100));
+	game.addObject(std::make_shared<GameObject>("rect", 300, 100, 100, 100));
 	
 	{
 		std::shared_ptr<Player> player = make_shared<Player>();
@@ -62,7 +66,7 @@ int main() {
 		game.addObject(player);
 	}
 
-	game.deleteObject("rect");
+	//game.deleteObject("rect");
 
 	game.Start();
 
