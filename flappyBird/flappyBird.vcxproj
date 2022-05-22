@@ -148,6 +148,7 @@
     <ClCompile Include="SGameEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PhisicalObject.h" />
     <ClInclude Include="SGameEngine.h" />

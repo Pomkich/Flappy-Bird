@@ -18,7 +18,10 @@ void SGameEngine::addObject(std::shared_ptr<GameObject> p_obj) {
 
 void SGameEngine::deleteObject(std::string obj_name) {
     if (!game_objects.empty()) {
-        game_objects.erase(std::remove_if(game_objects.begin(), game_objects.end(), [obj_name](std::shared_ptr<GameObject> obj) { return obj->getName() == obj_name; }), game_objects.end());
+        game_objects.erase(std::remove_if(game_objects.begin(), game_objects.end(), 
+            [obj_name](std::shared_ptr<GameObject> obj) { return obj->getName() == obj_name; }),
+            game_objects.end()
+        );
     }
 }
 
@@ -34,12 +37,39 @@ void SGameEngine::CheckCollision() {
     if (game_objects.size() > 1) {
         for (int checkable_obj = 0; checkable_obj < game_objects.size(); checkable_obj++) {
             for (int obj_oncheck = checkable_obj + 1; obj_oncheck < game_objects.size(); obj_oncheck++) {
-                auto rect1 = game_objects[checkable_obj]->getBoundingRect();
+                auto rect1 = game_objects[checkable_obj]->getBoundingRect();    // getting rectangles bounds
                 auto rect2 = game_objects[obj_oncheck]->getBoundingRect();
+                // simple collision detection of 2 rectangles
                 if (std::abs(rect1.getPosition().x - rect2.getPosition().x) <= rect2.getSize().x &&
                     std::abs(rect1.getPosition().y - rect2.getPosition().y) <= rect2.getSize().y) {
-                    game_objects[checkable_obj]->onCollide(game_objects[obj_oncheck]);
-                    game_objects[obj_oncheck]->onCollide(game_objects[checkable_obj]);
+
+                    auto center_rect1 = rect1.getPosition();
+                    auto center_rect2 = rect2.getPosition();
+
+                    center_rect1.x = center_rect1.x + (rect1.getSize().x / 2); 
+                    center_rect1.y = center_rect1.y + (rect1.getSize().y / 2);
+                    center_rect2.x = center_rect2.x + (rect2.getSize().x / 2);
+                    center_rect2.y = center_rect2.y + (rect2.getSize().y / 2);
+
+                    Side side1 = Side::left, side2 = Side::right;
+                    if (center_rect1.x > center_rect2.x) {
+                        side1 = Side::left; side2 = Side::right;
+                    }
+                    else {
+                        side1 = Side::right; side2 = Side::left;
+                    }
+                    game_objects[checkable_obj]->onCollide(game_objects[obj_oncheck], side1);
+                    game_objects[obj_oncheck]->onCollide(game_objects[checkable_obj], side2);
+
+                    if (center_rect1.y > center_rect2.y) {
+                        side1 = Side::up; side2 = Side::down;
+                    }
+                    else {
+                        side1 = Side::down; side2 = Side::up;
+                    }
+
+                    game_objects[checkable_obj]->onCollide(game_objects[obj_oncheck], side1);
+                    game_objects[obj_oncheck]->onCollide(game_objects[checkable_obj], side2);
                 }
             }
         }

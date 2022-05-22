@@ -49,8 +49,23 @@ protected:
 		}
 	}
 
-	virtual void onCollide(std::shared_ptr<GameObject> obj_col) override {
-		cout << "collided" << endl;
+	virtual void onCollide(std::shared_ptr<GameObject> obj_col, Side side) override {
+		cout << "collided: ";
+		switch (side) {
+		case Side::left:
+			cout << "left";
+			break;
+		case Side::right:
+			cout << "right";
+			break;
+		case Side::up:
+			cout << "up";
+			break;
+		case Side::down:
+			cout << "down";
+			break;
+		}
+		cout << endl;
 	}
 };
 

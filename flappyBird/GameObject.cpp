@@ -87,7 +87,7 @@ void GameObject::HandleInput(sf::Event input) {
 
 }
 
-void GameObject::onCollide(std::shared_ptr<GameObject> obj_col) {
+void GameObject::onCollide(std::shared_ptr<GameObject> obj_col, Side side) {
 
 }
 

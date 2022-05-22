@@ -2,6 +2,7 @@
 #include <memory>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Constants.h"
 
 class GameObject {
 protected:
@@ -30,7 +31,7 @@ public:
 protected:
 	virtual void Update();	// calling each frame
 	virtual void HandleInput(sf::Event input);	// calling each frame
-	virtual void onCollide(std::shared_ptr<GameObject> obj_col);
+	virtual void onCollide(std::shared_ptr<GameObject> obj_col, Side side);	// it is necessary to specify the side with which the collision occurred
 
 	friend class SGameEngine;
 };
