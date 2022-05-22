@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "SFML/Window.hpp"
 #include <iostream>
+#include <thread>
 
 
 // main class, contents game objects and logic of engine
@@ -11,6 +12,7 @@ class SGameEngine {
 private:
 	sf::RenderWindow window;
 	std::vector<std::shared_ptr<GameObject>> game_objects;
+	sf::Clock clock;	// needs to measure time betwean flames
 
 	void HandleInput(sf::Event input);
 	void CheckCollision();

@@ -74,7 +74,7 @@ public:
 	Bird() {
 
 		sf::Vector2f move_vector(0, 0);
-		sf::Vector2f velocity(0, -0.01);
+		sf::Vector2f velocity(0, -1);
 		moving_vectors.push_back(move_vector);
 		moving_vectors.push_back(velocity);
 	}
@@ -87,10 +87,8 @@ private:
 	}
 
 	virtual void HandleInput(sf::Event input) override {
-		if (input.type == sf::Event::KeyPressed) {
-			if (input.key.code == sf::Keyboard::Space) {
-				moving_vectors[0].y = -0.5;
-			}
+		if (input.type == sf::Event::KeyPressed && input.key.code == sf::Keyboard::Space) {
+				moving_vectors[0].y = -10;
 		}
 	}
 

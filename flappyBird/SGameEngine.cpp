@@ -99,8 +99,14 @@ void SGameEngine::Render() {
 void SGameEngine::Start() {
     window.setActive(true);
     window.setKeyRepeatEnabled(false); // better disable for better perfomance
+
+    sf::Time elapsed;
+    sf::Time lag = sf::milliseconds(0);
+
     while (window.isOpen())
     {
+        elapsed = clock.restart();
+        lag += elapsed;
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event input;
         while (window.pollEvent(input))
@@ -111,7 +117,12 @@ void SGameEngine::Start() {
             }
         }
         CheckCollision();
-        Update();
+        while (lag.asMilliseconds() > 32) {
+            Update();
+            std::cout << lag.asMilliseconds() << std::endl;
+            lag -= sf::milliseconds(32);
+        }
         Render();
+        std::this_thread::sleep_for(std::chrono::milliseconds(16)); // 16 milliseconds ~= 60 fps
     }
 }
