@@ -87,19 +87,24 @@ private:
 
 	virtual void HandleInput(sf::Event input) override {
 		if (input.type == sf::Event::KeyPressed && input.key.code == sf::Keyboard::Space) {
-				moving_vectors[0].y = 10;
+			moving_vectors[0].y = 10;
 		}
 	}
 
 	virtual void onCollide(std::shared_ptr<GameObject> obj_col, Side side) override {
-
+		//cout << "side: " << (int)side << endl;
+		cout << "game over" << endl;
+		//moving_vectors[0].y = 0;
+		//moving_vectors[1].y = 0;
 	}
 };
 
 int main() {
 	SGameEngine game;
 
-	game.addObject(std::make_shared<GameObject>("rect", 300, 100, 100, 100));
+	game.addObject(std::make_shared<GameObject>("floor", 0, 550, 800, 50));
+ 	game.addObject(std::make_shared<GameObject>("ceiling", 0, 0, 800, 50));
+
 	
 	{
 		//std::shared_ptr<Player> player = make_shared<Player>();
@@ -107,6 +112,7 @@ int main() {
 		//player->setName("player");
 		std::shared_ptr<Bird> bird = make_shared<Bird>();
 		bird->setSize(100, 100);
+		bird->setPosition(100, 300);
 		bird->setName("bird");
 		game.addObject(bird);
 	}

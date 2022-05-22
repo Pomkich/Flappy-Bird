@@ -33,20 +33,34 @@ void SGameEngine::HandleInput(sf::Event input) {
     }
 }
 
+// additional function that calculates intersection of segments
+bool otrezok(double x11, double x12, double x21, double x22) {
+    if ((x11 > x21 && x11 < x22) || (x12 > x21 && x12 < x22)) {
+        return true;
+    }
+    return false;
+}
+
 void SGameEngine::CheckCollision() {
     if (game_objects.size() > 1) {
         for (int checkable_obj = 0; checkable_obj < game_objects.size(); checkable_obj++) {
             for (int obj_oncheck = checkable_obj + 1; obj_oncheck < game_objects.size(); obj_oncheck++) {
                 auto rect1 = game_objects[checkable_obj]->getBoundingRect();    // getting rectangles bounds
                 auto rect2 = game_objects[obj_oncheck]->getBoundingRect();
-                // simple collision detection of 2 rectangles
-                if (std::abs(rect1.getPosition().x - rect2.getPosition().x) <= rect2.getSize().x &&
-                    std::abs(rect1.getPosition().y - rect2.getPosition().y) <= rect2.getSize().y) {
+                
+                
+                double x_left1 = rect1.getPosition().x, x_right1 = rect1.getPosition().x + rect1.getSize().x;
+                double x_left2 = rect2.getPosition().x, x_right2 = rect2.getPosition().x + rect2.getSize().x;
 
+                double y_left1 = rect1.getPosition().y, y_right1 = rect1.getPosition().y + rect1.getSize().y;
+                double y_left2 = rect2.getPosition().y, y_right2 = rect2.getPosition().y + rect2.getSize().y;
+
+                if ((otrezok(x_left1, x_right1, x_left2, x_right2) || otrezok(x_left2, x_right2, x_left1, x_right1)) &&
+                    (otrezok(y_left1, y_right1, y_left2, y_right2) || otrezok(y_left2, y_right2, y_left1, y_right1))) {
                     auto center_rect1 = rect1.getPosition();
                     auto center_rect2 = rect2.getPosition();
 
-                    center_rect1.x = center_rect1.x + (rect1.getSize().x / 2); 
+                    center_rect1.x = center_rect1.x + (rect1.getSize().x / 2);
                     center_rect1.y = center_rect1.y + (rect1.getSize().y / 2);
                     center_rect2.x = center_rect2.x + (rect2.getSize().x / 2);
                     center_rect2.y = center_rect2.y + (rect2.getSize().y / 2);
@@ -119,7 +133,6 @@ void SGameEngine::Start() {
         CheckCollision();
         while (lag.asMilliseconds() > 32) {
             Update();
-            std::cout << lag.asMilliseconds() << std::endl;
             lag -= sf::milliseconds(32);
         }
         Render();
