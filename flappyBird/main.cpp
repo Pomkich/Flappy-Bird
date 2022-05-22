@@ -69,16 +69,49 @@ protected:
 	}
 };
 
+class Bird : public PhisicalObject {
+public:
+	Bird() {
+
+		sf::Vector2f move_vector(0, 0);
+		sf::Vector2f velocity(0, -0.01);
+		moving_vectors.push_back(move_vector);
+		moving_vectors.push_back(velocity);
+	}
+
+private:
+	virtual void Update() override {
+		PhisicalObject::Update();	// call object moving
+
+		moving_vectors[0].y -= moving_vectors[1].y;	// the influence of gravity
+	}
+
+	virtual void HandleInput(sf::Event input) override {
+		if (input.type == sf::Event::KeyPressed) {
+			if (input.key.code == sf::Keyboard::Space) {
+				moving_vectors[0].y = -0.5;
+			}
+		}
+	}
+
+	virtual void onCollide(std::shared_ptr<GameObject> obj_col, Side side) override {
+
+	}
+};
+
 int main() {
 	SGameEngine game;
 
 	game.addObject(std::make_shared<GameObject>("rect", 300, 100, 100, 100));
 	
 	{
-		std::shared_ptr<Player> player = make_shared<Player>();
-		player->setSize(100, 100);
-		player->setName("player");
-		game.addObject(player);
+		//std::shared_ptr<Player> player = make_shared<Player>();
+		//player->setSize(100, 100);
+		//player->setName("player");
+		std::shared_ptr<Bird> bird = make_shared<Bird>();
+		bird->setSize(100, 100);
+		bird->setName("bird");
+		game.addObject(bird);
 	}
 
 	//game.deleteObject("rect");
