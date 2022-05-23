@@ -69,9 +69,17 @@ protected:
 	}
 };*/
 
+enum class Type {
+	pipe = 0, score_collider
+};
+
 class Bird : public PhisicalObject {
+private:
+	//std::weak_ptr<SGameEngine> engine_ptr;
+
 public:
 	Bird() {
+		//engine_ptr =
 		sf::Vector2f move_vector(0, 0);
 		sf::Vector2f velocity(0, -1);
 		moving_vectors.push_back(move_vector);
@@ -93,33 +101,36 @@ private:
 
 	virtual void onCollide(std::shared_ptr<GameObject> obj_col, Side side) override {
 		//cout << "side: " << (int)side << endl;
-		cout << "game over" << endl;
+		if (obj_col->getType() == static_cast<int>(Type::pipe)) {
+			cout << "game over" << endl;
+		}
 		//moving_vectors[0].y = 0;
 		//moving_vectors[1].y = 0;
 	}
 };
 
+//void spawner()
+
 int main() {
-	SGameEngine game;
+	std::shared_ptr<SGameEngine> game = make_shared<SGameEngine>();
 
-	game.addObject(std::make_shared<GameObject>("floor", 0, 550, 800, 50));
- 	game.addObject(std::make_shared<GameObject>("ceiling", 0, 0, 800, 50));
-
-	
 	{
-		//std::shared_ptr<Player> player = make_shared<Player>();
-		//player->setSize(100, 100);
-		//player->setName("player");
 		std::shared_ptr<Bird> bird = make_shared<Bird>();
 		bird->setSize(100, 100);
 		bird->setPosition(100, 300);
 		bird->setName("bird");
-		game.addObject(bird);
+		game->addObject(bird);
+
+		std::shared_ptr<GameObject> floor = std::make_shared<GameObject>("floor", 0, 550, 800, 50);
+		floor->setType(static_cast<int>(Type::pipe));
+		std::shared_ptr<GameObject> ceiling = std::make_shared<GameObject>("ceiling", 0, 0, 800, 50);
+		ceiling->setType(static_cast<int>(Type::score_collider));
+
+		game->addObject(floor);
+		game->addObject(ceiling);
 	}
 
-	//game.deleteObject("rect");
-
-	game.Start();
+	game->Start();
 
 
 	return 0;

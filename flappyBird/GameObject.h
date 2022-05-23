@@ -10,6 +10,7 @@ protected:
 	sf::Vector2f position;
 	sf::RectangleShape bounding_rect;	// used in collision detection
 	sf::RectangleShape sprite;	// should be real sprite
+	int type;	// interpretation falls on the shoulders of the developer
 
 public:
 	GameObject();
@@ -21,11 +22,13 @@ public:
 	void setSize(sf::Vector2f size);
 	void setSize(float x, float y);
 	void setName(std::string nm);
+	void setType(int tp);
 
 	sf::Vector2f getPosition();
 	sf::RectangleShape getSprite();
 	sf::RectangleShape getBoundingRect();
 	std::string getName();
+	int getType();
 	~GameObject();
 
 protected:

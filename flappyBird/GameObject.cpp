@@ -2,6 +2,7 @@
 
 GameObject::GameObject() {
 	int x = 0, y = 0, width = 0, height = 0;
+	type = 0;
 	name = "Undefined";
 	position.x = x;
 	position.y = y;
@@ -14,6 +15,7 @@ GameObject::GameObject() {
 
 GameObject::GameObject(std::string nm) {
 	int x = 0, y = 0, width = 0, height = 0;
+	type = 0;
 	name = nm;
 	position.x = x;
 	position.y = y;
@@ -25,6 +27,7 @@ GameObject::GameObject(std::string nm) {
 }
 
 GameObject::GameObject(std::string nm, float x, float y, float width, float height) {
+	type = 0;
 	name = nm;
 	position.x = x;
 	position.y = y;
@@ -63,6 +66,10 @@ void GameObject::setName(std::string nm) {
 	name = nm;
 }
 
+void GameObject::setType(int tp) {
+	type = tp;
+}
+
 sf::Vector2f GameObject::getPosition() {
 	return position;
 }
@@ -77,6 +84,10 @@ sf::RectangleShape GameObject::getBoundingRect() {
 
 std::string GameObject::getName() {
 	return name;
+}
+
+int GameObject::getType() {
+	return type;
 }
 
 void GameObject::Update() {

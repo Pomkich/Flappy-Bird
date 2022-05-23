@@ -48,7 +48,6 @@ void SGameEngine::CheckCollision() {
                 auto rect1 = game_objects[checkable_obj]->getBoundingRect();    // getting rectangles bounds
                 auto rect2 = game_objects[obj_oncheck]->getBoundingRect();
                 
-                
                 double x_left1 = rect1.getPosition().x, x_right1 = rect1.getPosition().x + rect1.getSize().x;
                 double x_left2 = rect2.getPosition().x, x_right2 = rect2.getPosition().x + rect2.getSize().x;
 
@@ -119,23 +118,28 @@ void SGameEngine::Start() {
 
     while (window.isOpen())
     {
-        elapsed = clock.restart();
-        lag += elapsed;
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event input;
-        while (window.pollEvent(input))
-        {   
-            HandleInput(input);
-            if (input.type == sf::Event::Closed) {
-                window.close();
+        {   // start of critical section
+            std::unique_lock<std::mutex> lock(synch);
+
+            elapsed = clock.restart();
+            lag += elapsed;
+            // check all the window's events that were triggered since the last iteration of the loop
+            sf::Event input;
+            while (window.pollEvent(input))
+            {
+                HandleInput(input);
+                if (input.type == sf::Event::Closed) {
+                    window.close();
+                }
             }
-        }
-        CheckCollision();
-        while (lag.asMilliseconds() > 32) {
-            Update();
-            lag -= sf::milliseconds(32);
-        }
-        Render();
-        std::this_thread::sleep_for(std::chrono::milliseconds(16)); // 16 milliseconds ~= 60 fps
+            CheckCollision();
+            while (lag.asMilliseconds() > UPDATE_RATE) {
+                Update();
+                lag -= sf::milliseconds(UPDATE_RATE);
+            }
+            Render();
+        }   // end of critical section
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(UPDATE_RATE / 2))); // 16 milliseconds ~= 60 fps
     }
 }
