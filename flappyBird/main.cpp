@@ -1,6 +1,8 @@
 #include <iostream>
 #include "SGameEngine.h"
 #include "PhisicalObject.h"
+#include "FlappyBird.h"
+#include "Bird.h"
 
 using namespace std;
 
@@ -69,53 +71,11 @@ protected:
 	}
 };*/
 
-enum class Type {
-	pipe = 0, score_collider
-};
 
-class Bird : public PhisicalObject {
-private:
-	std::weak_ptr<SGameEngine> engine_ptr;
-
-public:
-	Bird(std::shared_ptr<SGameEngine> e_ptr) {
-		engine_ptr = e_ptr;
-		sf::Vector2f move_vector(0, 0);
-		sf::Vector2f velocity(0, -1);
-		moving_vectors.push_back(move_vector);
-		moving_vectors.push_back(velocity);
-	}
-
-private:
-	virtual void Update() override {
-		PhisicalObject::Update();	// call object moving
-
-		moving_vectors[0].y += moving_vectors[1].y;	// the influence of gravity
-	}
-
-	virtual void HandleInput(sf::Event input) override {
-		if (input.type == sf::Event::KeyPressed && input.key.code == sf::Keyboard::Space) {
-			moving_vectors[0].y = 10;
-		}
-	}
-
-	virtual void onCollide(std::shared_ptr<GameObject> obj_col, Side side) override {
-		//cout << "side: " << (int)side << endl;
-		if (obj_col->getType() == static_cast<int>(Type::pipe)) {
-			cout << "game over" << endl;
-		}
-		else {
- 			engine_ptr.lock()->deleteObject(obj_col->getName());
-		}
-		//moving_vectors[0].y = 0;
-		//moving_vectors[1].y = 0;
-	}
-};
-
-//void spawner()
 
 int main() {
-	std::shared_ptr<SGameEngine> game = make_shared<SGameEngine>();
+
+	std::shared_ptr<FlappyBird> game = make_shared<FlappyBird>();
 
 	{
 		std::shared_ptr<Bird> bird = make_shared<Bird>(game);
@@ -134,7 +94,6 @@ int main() {
 	}
 
 	game->Start();
-
 
 	return 0;
 }

@@ -11,7 +11,7 @@
 
 // main class, contents game objects and logic of engine
 class SGameEngine {
-private:
+protected:
 	std::mutex synch;	// need to access the list of objects
 	sf::RenderWindow window;
 	std::vector<std::shared_ptr<GameObject>> game_objects;

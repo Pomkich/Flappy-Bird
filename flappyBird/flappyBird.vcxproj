@@ -142,13 +142,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bird.cpp" />
+    <ClCompile Include="FlappyBird.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhisicalObject.cpp" />
     <ClCompile Include="SGameEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bird.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="FlappyBird.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PhisicalObject.h" />
     <ClInclude Include="SGameEngine.h" />
