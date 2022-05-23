@@ -75,11 +75,11 @@ enum class Type {
 
 class Bird : public PhisicalObject {
 private:
-	//std::weak_ptr<SGameEngine> engine_ptr;
+	std::weak_ptr<SGameEngine> engine_ptr;
 
 public:
-	Bird() {
-		//engine_ptr =
+	Bird(std::shared_ptr<SGameEngine> e_ptr) {
+		engine_ptr = e_ptr;
 		sf::Vector2f move_vector(0, 0);
 		sf::Vector2f velocity(0, -1);
 		moving_vectors.push_back(move_vector);
@@ -104,6 +104,9 @@ private:
 		if (obj_col->getType() == static_cast<int>(Type::pipe)) {
 			cout << "game over" << endl;
 		}
+		else {
+ 			engine_ptr.lock()->deleteObject(obj_col->getName());
+		}
 		//moving_vectors[0].y = 0;
 		//moving_vectors[1].y = 0;
 	}
@@ -115,7 +118,7 @@ int main() {
 	std::shared_ptr<SGameEngine> game = make_shared<SGameEngine>();
 
 	{
-		std::shared_ptr<Bird> bird = make_shared<Bird>();
+		std::shared_ptr<Bird> bird = make_shared<Bird>(game);
 		bird->setSize(100, 100);
 		bird->setPosition(100, 300);
 		bird->setName("bird");

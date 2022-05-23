@@ -6,6 +6,7 @@
 #include <iostream>
 #include <thread>
 #include <mutex>
+#include <list>
 
 
 // main class, contents game objects and logic of engine
@@ -15,11 +16,13 @@ private:
 	sf::RenderWindow window;
 	std::vector<std::shared_ptr<GameObject>> game_objects;
 	sf::Clock clock;	// needs to measure time betwean flames
+	std::list<std::string> delete_list;	// you cannot delete objects in the middle of the game cycle, so we need to delay their removal
 
 	void HandleInput(sf::Event input);
 	void CheckCollision();
 	void Update();
 	void Render();
+	void DeleteObjects();	// called in end of game loop
 
 public:
 	SGameEngine();

@@ -18,10 +18,7 @@ void SGameEngine::addObject(std::shared_ptr<GameObject> p_obj) {
 
 void SGameEngine::deleteObject(std::string obj_name) {
     if (!game_objects.empty()) {
-        game_objects.erase(std::remove_if(game_objects.begin(), game_objects.end(), 
-            [obj_name](std::shared_ptr<GameObject> obj) { return obj->getName() == obj_name; }),
-            game_objects.end()
-        );
+        delete_list.push_back(obj_name);
     }
 }
 
@@ -109,18 +106,27 @@ void SGameEngine::Render() {
     window.display();
 }
 
+void SGameEngine::DeleteObjects() {
+    for (auto& obj_name : delete_list) {
+        game_objects.erase(std::remove_if(game_objects.begin(), game_objects.end(),
+            [obj_name](std::shared_ptr<GameObject> obj) { return obj->getName() == obj_name; }),
+            game_objects.end()
+        );
+    }
+    delete_list.clear();
+}
+
 void SGameEngine::Start() {
     window.setActive(true);
     window.setKeyRepeatEnabled(false); // better disable for better perfomance
 
     sf::Time elapsed;
     sf::Time lag = sf::milliseconds(0);
-
+    
     while (window.isOpen())
     {
         {   // start of critical section
             std::unique_lock<std::mutex> lock(synch);
-
             elapsed = clock.restart();
             lag += elapsed;
             // check all the window's events that were triggered since the last iteration of the loop
@@ -138,6 +144,7 @@ void SGameEngine::Start() {
                 lag -= sf::milliseconds(UPDATE_RATE);
             }
             Render();
+            DeleteObjects();
         }   // end of critical section
 
         std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(UPDATE_RATE / 2))); // 16 milliseconds ~= 60 fps
