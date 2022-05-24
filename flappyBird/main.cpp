@@ -93,6 +93,8 @@ int main() {
 		game->addObject(ceiling);
 	}
 
+	game->addEvent(0, &FlappyBird::Restart);
+
 	game->Start();
 
 	return 0;

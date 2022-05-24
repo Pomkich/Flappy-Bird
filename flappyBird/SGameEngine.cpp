@@ -103,6 +103,10 @@ void SGameEngine::Update() {
     }
 }
 
+void SGameEngine::HandleTiming(double elapsed) {
+
+}
+
 void SGameEngine::Render() {
     window.clear(sf::Color::Black);
 
@@ -153,6 +157,7 @@ void SGameEngine::Start() {
                 Update();
                 lag -= sf::milliseconds(UPDATE_RATE);
             }
+            HandleTiming(elapsed.asMilliseconds());
             Render();
             DeleteObjects();
         }   // end of critical section

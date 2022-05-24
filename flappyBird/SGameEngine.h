@@ -19,8 +19,9 @@ protected:
 	std::list<std::string> delete_list;	// you cannot delete objects in the middle of the game cycle, so we need to delay their removal
 
 	void HandleInput(sf::Event input);
-	void CheckCollision();
 	void Update();
+	void CheckCollision();
+	virtual void HandleTiming(double elapsed);	// if you need to calculate how much time has passed and perform any actions, then override this
 	void Render();
 	void DeleteObjects();	// called in end of game loop
 
