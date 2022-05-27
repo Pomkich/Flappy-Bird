@@ -36,10 +36,44 @@ void FlappyBird::addEvent(double time, void (FlappyBird::*method_ptr)()) {
 	event_id++;
 }
 
-void FlappyBird::Init() {
+void FlappyBird::Restart() {
+	std::cout << "restarted" << std::endl;
+	srand(time(NULL));
+	current_pipe = 0;
+
 	bird = std::make_shared<Bird>(shared_from_this());
+	bird->setPosition(bird_start_x, bird_start_y);
+	bird->setSize(bird_size, bird_size);
+
+	for (int i = 0; i < 4; i++) {
+		auto new_pipe = std::make_shared<PhisicalObject>();
+		new_pipe->setName("up_pipe" + std::to_string(i));
+		new_pipe->setPosition(800, 0);
+		new_pipe->setSize(pipe_width, pipe_height);
+		new_pipe->addVector(sf::Vector2f(pipe_speed, 0));
+		up_pipes.push_back(new_pipe);
+		addObject(new_pipe);
+	}
+
+	for (int i = 0; i < 4; i++) {
+		auto new_pipe = std::make_shared<PhisicalObject>();
+		new_pipe->setName("bottom_pipe" + std::to_string(i));
+		new_pipe->setPosition(800, pipe_height + pipe_division);
+		new_pipe->setSize(pipe_width, pipe_height);
+		new_pipe->addVector(sf::Vector2f(pipe_speed, 0));
+		bottom_pipes.push_back(new_pipe);
+		addObject(new_pipe);
+	}
+
+	addObject(bird);
+	addEvent(2000, &FlappyBird::ReplacePipe);
 }
 
-void FlappyBird::Restart() {
-	std::cout << "restarting..." << std::endl;
+void FlappyBird::ReplacePipe() {
+	if (current_pipe == 4) current_pipe = 0;
+	up_pipes[current_pipe]->setPosition(800, -(rand() % 400));
+	bottom_pipes[current_pipe]->setPosition(800, up_pipes[current_pipe]->getPosition().y + pipe_division + pipe_height);
+	std::cout << up_pipes[current_pipe]->getPosition().y << std::endl;
+	current_pipe++;
+	addEvent(2000, &FlappyBird::ReplacePipe);
 }

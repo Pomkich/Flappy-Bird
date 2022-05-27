@@ -77,7 +77,7 @@ int main() {
 
 	std::shared_ptr<FlappyBird> game = make_shared<FlappyBird>();
 
-	{
+	/* {
 		std::shared_ptr<Bird> bird = make_shared<Bird>(game);
 		bird->setSize(100, 100);
 		bird->setPosition(100, 300);
@@ -91,7 +91,7 @@ int main() {
 
 		game->addObject(floor);
 		game->addObject(ceiling);
-	}
+	}*/
 
 	game->addEvent(0, &FlappyBird::Restart);
 

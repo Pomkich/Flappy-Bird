@@ -1,6 +1,7 @@
 #pragma once
 #include "PhisicalObject.h"
 #include "FlappyBird.h"
+#include "GameConstants.h"
 
 class Bird : public PhisicalObject {
 private:

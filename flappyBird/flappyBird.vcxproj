@@ -153,6 +153,7 @@
     <ClInclude Include="Bird.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="FlappyBird.h" />
+    <ClInclude Include="GameConstants.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="PhisicalObject.h" />
     <ClInclude Include="SGameEngine.h" />

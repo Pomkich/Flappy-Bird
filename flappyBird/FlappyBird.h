@@ -1,5 +1,7 @@
 #pragma once
 #include "SGameEngine.h"
+#include "PhisicalObject.h"
+#include <random>
 
 class Bird;	// forward declaration
 
@@ -9,7 +11,8 @@ class FlappyBird : public SGameEngine, public std::enable_shared_from_this<Flapp
 private:
 	int current_pipe;
 	std::shared_ptr<Bird> bird;
-	std::vector<std::shared_ptr<GameObject>> pipes;
+	std::vector<std::shared_ptr<PhisicalObject>> up_pipes;
+	std::vector<std::shared_ptr<PhisicalObject>> bottom_pipes;
 	// events, that would call after the expiration of time
 	// first element of tuple - id, needed for identifying event and deleting him
 	// second - timing. It decreases every iteration
@@ -22,9 +25,8 @@ private:
 public:
 	FlappyBird();
 
-	void Init();
-
 	void Restart();
+	void ReplacePipe();
 
 	void addEvent(double time, void (FlappyBird::*method_ptr)());
 };
