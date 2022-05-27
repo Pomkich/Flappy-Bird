@@ -5,6 +5,7 @@
 
 class Bird : public PhisicalObject {
 private:
+	bool game_over;
 	std::weak_ptr<FlappyBird> engine_ptr;
 
 public:

@@ -13,5 +13,6 @@ protected:
 public:
 	PhisicalObject();
 	void addVector(sf::Vector2f vec);
+	void deleteAllVectors();
 };
 

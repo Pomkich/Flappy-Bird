@@ -19,3 +19,7 @@ void PhisicalObject::Update() {	// phisical object must take into account
 void PhisicalObject::addVector(sf::Vector2f vec) {
 	moving_vectors.push_back(vec);
 }
+
+void PhisicalObject::deleteAllVectors() {
+	moving_vectors.clear();
+}

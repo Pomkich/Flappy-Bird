@@ -25,6 +25,8 @@ private:
 public:
 	FlappyBird();
 
+	void GameOver();
+	void ClearGame();
 	void Restart();
 	void ReplacePipe();
 
