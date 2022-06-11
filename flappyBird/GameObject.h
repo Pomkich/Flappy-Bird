@@ -9,7 +9,9 @@ protected:
 	std::string name; // name must be unique
 	sf::Vector2f position;
 	sf::RectangleShape bounding_rect;	// used in collision detection
-	sf::RectangleShape sprite;	// should be real sprite
+	sf::Texture texture;
+	sf::Sprite sprite;
+	//sf::RectangleShape sprite;	// should be real sprite
 	int type;	// interpretation falls on the shoulders of the developer
 
 public:
@@ -23,9 +25,10 @@ public:
 	void setSize(float x, float y);
 	void setName(std::string nm);
 	void setType(int tp);
+	void setTexture(std::string text_path);
 
 	sf::Vector2f getPosition();
-	sf::RectangleShape getSprite();
+	sf::Sprite getSprite();
 	sf::RectangleShape getBoundingRect();
 	std::string getName();
 	int getType();

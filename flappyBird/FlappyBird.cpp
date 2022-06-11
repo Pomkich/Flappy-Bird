@@ -45,6 +45,7 @@ void FlappyBird::Restart() {
 	bird->setPosition(bird_start_x, bird_start_y);
 	bird->setSize(bird_size, bird_size);
 	bird->setName("bird");
+ 	bird->setTexture("sprites/bird.png");
 	//bird->addVector(sf::Vector2f(0, -4)); // velocity
 
 	for (int i = 0; i < 4; i++) {

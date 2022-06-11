@@ -11,8 +11,6 @@ GameObject::GameObject() {
 	bounding_rect.setOutlineThickness(3);
 	bounding_rect.setOutlineColor(sf::Color::Red);
 	bounding_rect.setFillColor(sf::Color::Transparent);
-	sprite.setSize(sf::Vector2f(width, height));
-	sprite.setFillColor(sf::Color::Green);
 	sprite.setPosition(sf::Vector2f(x, y));
 }
 
@@ -27,8 +25,6 @@ GameObject::GameObject(std::string nm) {
 	bounding_rect.setOutlineThickness(3);
 	bounding_rect.setOutlineColor(sf::Color::Red);
 	bounding_rect.setFillColor(sf::Color::Transparent);
-	sprite.setSize(sf::Vector2f(width, height));
-	sprite.setFillColor(sf::Color::Green);
 	sprite.setPosition(sf::Vector2f(x, y));
 }
 
@@ -42,8 +38,6 @@ GameObject::GameObject(std::string nm, float x, float y, float width, float heig
 	bounding_rect.setOutlineThickness(3);
 	bounding_rect.setOutlineColor(sf::Color::Red);
 	bounding_rect.setFillColor(sf::Color::Transparent);
-	sprite.setSize(sf::Vector2f(width, height));
-	sprite.setFillColor(sf::Color::Green);
 	sprite.setPosition(sf::Vector2f(x, y));
 }
 
@@ -62,13 +56,11 @@ void GameObject::setPosition(float x, float y) {
 
 void GameObject::setSize(sf::Vector2f size) {
 	bounding_rect.setSize(size);
-	sprite.setSize(size);
 }
 
 void GameObject::setSize(float x, float y) {
 	sf::Vector2f size(x, y);
 	bounding_rect.setSize(size);
-	sprite.setSize(size);
 }
 
 void GameObject::setName(std::string nm) {
@@ -79,11 +71,17 @@ void GameObject::setType(int tp) {
 	type = tp;
 }
 
+void GameObject::setTexture(std::string text_path) {
+	if (texture.loadFromFile(text_path)) {
+		sprite.setTexture(texture);
+	}
+}
+
 sf::Vector2f GameObject::getPosition() {
 	return position;
 }
 
-sf::RectangleShape GameObject::getSprite() {
+sf::Sprite GameObject::getSprite() {
 	return sprite;
 }
 
