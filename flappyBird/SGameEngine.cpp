@@ -116,6 +116,12 @@ void SGameEngine::Render() {
         }
     }
 
+    if (!game_objects.empty()) {
+        for (auto& object : game_objects) {
+            window.draw(object->getBoundingRect());
+        }
+    }
+
     window.display();
 }
 

@@ -8,6 +8,9 @@ GameObject::GameObject() {
 	position.y = y;
 	bounding_rect.setPosition(sf::Vector2f(x, y));
 	bounding_rect.setSize(sf::Vector2f(width, height));
+	bounding_rect.setOutlineThickness(3);
+	bounding_rect.setOutlineColor(sf::Color::Red);
+	bounding_rect.setFillColor(sf::Color::Transparent);
 	sprite.setSize(sf::Vector2f(width, height));
 	sprite.setFillColor(sf::Color::Green);
 	sprite.setPosition(sf::Vector2f(x, y));
@@ -21,6 +24,9 @@ GameObject::GameObject(std::string nm) {
 	position.y = y;
 	bounding_rect.setPosition(sf::Vector2f(x, y));
 	bounding_rect.setSize(sf::Vector2f(width, height));
+	bounding_rect.setOutlineThickness(3);
+	bounding_rect.setOutlineColor(sf::Color::Red);
+	bounding_rect.setFillColor(sf::Color::Transparent);
 	sprite.setSize(sf::Vector2f(width, height));
 	sprite.setFillColor(sf::Color::Green);
 	sprite.setPosition(sf::Vector2f(x, y));
@@ -33,6 +39,9 @@ GameObject::GameObject(std::string nm, float x, float y, float width, float heig
 	position.y = y;
 	bounding_rect.setPosition(sf::Vector2f(x, y));
 	bounding_rect.setSize(sf::Vector2f(width, height));
+	bounding_rect.setOutlineThickness(3);
+	bounding_rect.setOutlineColor(sf::Color::Red);
+	bounding_rect.setFillColor(sf::Color::Transparent);
 	sprite.setSize(sf::Vector2f(width, height));
 	sprite.setFillColor(sf::Color::Green);
 	sprite.setPosition(sf::Vector2f(x, y));
