@@ -4,7 +4,7 @@ Bird::Bird(std::shared_ptr<FlappyBird> e_ptr) {
 	game_over = false;
 	engine_ptr = e_ptr;
 	sf::Vector2f move_vector(0, 0);
-	sf::Vector2f velocity(0, -4);
+	sf::Vector2f velocity(0, cvelocity);
 	moving_vectors.push_back(move_vector);
 	moving_vectors.push_back(velocity);
 }
@@ -20,7 +20,7 @@ void Bird::Update() {
 void Bird::HandleInput(sf::Event input) {
 	if (input.type == sf::Event::KeyPressed && input.key.code == sf::Keyboard::Space) {
 		if (!game_over) {
-			moving_vectors[0].y = 40;
+			moving_vectors[0].y = impulse;
 		}
 	}
 }

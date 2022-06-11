@@ -17,3 +17,6 @@ const int pipe_width = 100;
 const int pipe_height = 400;
 
 const double pipe_speed = 10.0;
+
+const double impulse = 40;
+const double cvelocity = -5.0;

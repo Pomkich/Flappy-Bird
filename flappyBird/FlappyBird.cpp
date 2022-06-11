@@ -2,12 +2,12 @@
 #include "Bird.h"
 
 FlappyBird::FlappyBird() {
-	
+	srand(time(NULL));
 }
 
 void FlappyBird::HandleTiming(double elapsed) {
 	// check all events
-	for (auto& time_event : events) {
+ 	for (auto& time_event : events) {
 		int id; double timing; void (FlappyBird::*method_ptr)();
 		std::tie(id, timing, method_ptr) = time_event;	// unpack elements of tuple
 		if (timing < 0) {	// if time expires, call function
@@ -39,7 +39,6 @@ void FlappyBird::addEvent(double time, void (FlappyBird::*method_ptr)()) {
 void FlappyBird::Restart() {
 	std::cout << "restarted" << std::endl;
 
-	srand(time(NULL));
 	current_pipe = 0;
 
 	bird = std::make_shared<Bird>(shared_from_this());
@@ -75,8 +74,8 @@ void FlappyBird::Restart() {
 void FlappyBird::ReplacePipe() {
 	if (current_pipe == 4) current_pipe = 0;
 	up_pipes[current_pipe]->setPosition(800, -(rand() % 400));
-	bottom_pipes[current_pipe]->setPosition(800, up_pipes[current_pipe]->getPosition().y + pipe_division + pipe_height);
-	std::cout << up_pipes[current_pipe]->getPosition().y << std::endl;
+	bottom_pipes[current_pipe]->setPosition(800, 
+		up_pipes[current_pipe]->getPosition().y + pipe_division + pipe_height);
 	current_pipe++;
 	addEvent(2000, &FlappyBird::ReplacePipe);
 }
@@ -100,7 +99,7 @@ void FlappyBird::GameOver() {
 		up_pipes[i]->deleteAllVectors();	// stop all pipes
 		bottom_pipes[i]->deleteAllVectors();
 	}
-	events.clear();
+	events.clear();	// delete all events of last game
 
 	addEvent(2000, &FlappyBird::ClearGame);
 	addEvent(2100, &FlappyBird::Restart);
