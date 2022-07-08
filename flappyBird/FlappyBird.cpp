@@ -51,6 +51,7 @@ void FlappyBird::Restart() {
 	for (int i = 0; i < 4; i++) {
 		auto new_pipe = std::make_shared<PhisicalObject>();
 		new_pipe->setName("up_pipe" + std::to_string(i));
+		new_pipe->setTexture("sprites/pipe_up.png");
 		new_pipe->setPosition(800, 0);
 		new_pipe->setSize(pipe_width, pipe_height);
 		new_pipe->addVector(sf::Vector2f(pipe_speed, 0));
@@ -61,6 +62,7 @@ void FlappyBird::Restart() {
 	for (int i = 0; i < 4; i++) {
 		auto new_pipe = std::make_shared<PhisicalObject>();
 		new_pipe->setName("bottom_pipe" + std::to_string(i));
+		new_pipe->setTexture("sprites/pipe_bottom.png");
 		new_pipe->setPosition(800, pipe_height + pipe_division);
 		new_pipe->setSize(pipe_width, pipe_height);
 		new_pipe->addVector(sf::Vector2f(pipe_speed, 0));
