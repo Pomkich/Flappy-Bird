@@ -43,7 +43,7 @@ void FlappyBird::Restart() {
 
 	bird = std::make_shared<Bird>(shared_from_this());
 	bird->setPosition(bird_start_x, bird_start_y);
-	bird->setSize(bird_size, bird_size);
+	bird->setSize(bird_width, bird_height);
 	bird->setName("bird");
  	bird->setTexture("sprites/bird.png");
 	//bird->addVector(sf::Vector2f(0, -4)); // velocity

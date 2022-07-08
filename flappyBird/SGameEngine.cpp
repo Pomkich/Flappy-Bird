@@ -168,6 +168,6 @@ void SGameEngine::Start() {
             DeleteObjects();
         }   // end of critical section
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(UPDATE_RATE / 2))); // 16 milliseconds ~= 60 fps
+        std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(UPDATE_RATE / 4))); // 16 milliseconds ~= 60 fps
     }
 }

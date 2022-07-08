@@ -10,9 +10,10 @@ const int bird_start_y = 350;
 const int screen_width = 800;
 const int screen_height = 600;
 
-const int bird_size = 100;
-const int pipe_division = 300;
+const int bird_width = 100;
+const int bird_height = 80;
 
+const int pipe_division = 300;
 const int pipe_width = 100;
 const int pipe_height = 400;
 
